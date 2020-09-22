@@ -1,0 +1,24 @@
+NN Structure:
+Array(65, 506, 128, 48, 2)
+========
+Layer 1: 65 Neurons; 0 Dendrites
+  CurrentBoard + CurrentTurn
+  Each input is expected to be a number between 0 and 1 reflecting which peice is within the square (PeiceValue * (1 / 255))
+--------
+Layer 2: 506 Neurons; 32760 Dendrites
+  'Peice = MaximumPossibleMoves
+  K = 10, Q = 21
+  B = 14, N = 8, R = 14
+  P = 1 + 2 * 4 = DoubleJump + (Move + Attack) * PeiceChange = 9
+  And + 15 for Non Moved peices
+  MaxMoves = (K + Q) + (B + N + R) * 2 + P * 8 + 15 = 439
+  MaxMoves + CurrentBoard + CurrentTurn = 504 'Pass through of current board for reference
+--------
+Layer 3: 128 Neurons; 64512 Dendrites
+  Additional evaluation and conversion
+--------
+Layer 4: 48 Neurons; 24192 Dendrites
+  (OriginSquare + DestSquare) * 16 + ScoreHolder
+--------
+Layer 5: 2 Neurons; 96 Dendrites
+  OriginSquare + DestSquare
